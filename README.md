@@ -1,2 +1,3 @@
-# -ANgularJS-ZWJ-Highlighter
+# -ANgularJS Zero Width Joiner Highlighter
+
 Zero Wdith Joiner Highlighter, Highlighter normally highlight part of text which is passed to it, but the ZWJ Highlighter is useful when languages like persian or arabic are involved, which letter stick together... and the issue come to scene as the highlighter uses span and apply different style to that part of text...
