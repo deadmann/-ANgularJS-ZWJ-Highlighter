@@ -4,7 +4,7 @@
  * Taken from AngularUI Bootstrap Typeahead
  * See https://github.com/angular-ui/bootstrap/blob/0.10.0/src/typeahead/typeahead.js#L340
  */
-.filter('highlight', function() {
+.filter('zwjHighlight', function() {
   function escapeRegexp(queryToEscape) {
     return ('' + queryToEscape).replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
   }
