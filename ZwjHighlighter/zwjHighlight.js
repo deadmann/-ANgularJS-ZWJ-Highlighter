@@ -1,3 +1,4 @@
+angular.module('dmComponents', [])
 /**
  * Highlights text that matches $select.search.
  *
