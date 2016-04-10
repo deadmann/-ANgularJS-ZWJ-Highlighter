@@ -1,0 +1,120 @@
+/**
+ * Created by Hassan on 4/10/2016.
+ */
+
+var scripts = document.getElementsByTagName("script");
+var currentScriptPath = scripts[scripts.length - 1].src;
+
+angular.module('dmComponents', [])
+
+    .directive("contextMenuHandler", function () {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, elem, attr, ctrl) {
+                elem.bind('contextmenu', function (event) {
+
+                    var topCoordinate = event.pageY;
+                    //var menuHeight = angular.element($ul[0]).prop('offsetHeight');
+                    //var winHeight = event.view.innerHeight;
+                    //if (topCoordinate > menuHeight && winHeight - topCoordinate < menuHeight) {
+                    //    topCoordinate = event.pageY - menuHeight;
+                    //}
+                    //
+                    var leftCoordinate = event.pageX;
+                    //var menuWidth = angular.element($ul[0]).prop('offsetWidth');
+                    //var winWidth = event.view.innerWidth;
+                    //if (leftCoordinate > menuWidth && winWidth - leftCoordinate < menuWidth) {
+                    //    leftCoordinate = event.pageX - menuWidth;
+                    //}
+
+                    ctrl.$setViewValue({
+                        display: true,
+                        locationX: leftCoordinate,
+                        locationY: topCoordinate
+                    });
+                    return false; //Deactivate browser ContextMenu
+                });
+            }
+        }
+    })
+    .directive("contextMenuStructure", function () {
+        return {
+            restrict: 'AE',
+            scope: {
+                visible: '=',
+                positionType: '=',
+                leftCoordinate: '=',
+                topCoordinate: '='
+            },
+            transclude: true,
+            require: 'ngModel',
+            controller: ['$scope', function ($scope) {
+
+            }],
+            controllerAs: 'vm',
+            templateUrl: currentScriptPath.replace('contextMenuDirective.js', 'contextMenuStructureTemplate.html'),
+            link: function (scope, elem, attr, ctrl) {
+                scope.$watch(function () {
+                        return ctrl.$modelValue.display
+                    }, function () {
+                        if (ctrl.$modelValue != null) {
+                            var data = ctrl.$modelValue;
+                            scope.visible = data.display;
+                            //scope.display = block; //controlled by ng-if
+                            scope.positionType = 'absolute';
+                            scope.leftCoordinate = data.locationX + 'px';
+                            scope.topCoordinate = data.locationY + 'px'
+                        }
+                    }
+                );
+                //ctrl.$viewChangeListeners.push(function(){
+                //    if(!isNaN(val)) {
+                //        scope.visible = ctrl.$viewValue;
+                //    }
+                //});
+            }
+        }
+    })
+
+    .directive("contextMenuItemContainer", function () {
+        return {
+            restrict: 'AE',
+            require: '^^contextMenuStructure',
+            transclude: true,
+            templateUrl: currentScriptPath.replace('contextMenuDirective.js', 'contextMenuItemContainerTemplate.html'),
+            link: function (scope, elem, attr) {
+
+            }
+        }
+    })
+
+    .directive("contextMenuItem", function () {
+        return {
+            restrict: 'AE',
+            require: '^^contextMenuStructure',
+            transclude: true,
+            templateUrl: currentScriptPath.replace('contextMenuDirective.js', 'contextMenuItemTemplate.html'),
+            link: function (scope, elem, attr) {
+
+            }
+        }
+    })
+
+    .directive("contextMenuDivider", function () {
+        return {
+            restrict: 'AE',
+            require: '^^contextMenuStructure',
+            replace: true,
+            template: '<li class="divider"></li>'
+        }
+    })
+
+    .directive("contextMenuNested", function () {
+        return {
+            restrict: 'AE',
+            require: '^^contextMenuStructure',
+            transclude: true,
+            templateUrl: currentScriptPath.replace('contextMenuDirective.js', 'contextMenuNestedTemplate.html')
+        }
+    });
