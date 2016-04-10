@@ -1,0 +1,76 @@
+.ctx-menu,
+.ctx-menu-sub {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+}
+
+.ctx-menu {
+  display: block;
+}
+
+.ctx-menu-sub {
+  display: none;
+}
+
+.ctx-menu-item {
+  position: relative;
+}
+
+.ctx-menu-item > * > .ctx-menu-sub {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px;
+  border-radius: 0 6px 6px 6px;
+}
+
+.ctx-menu-item:hover > * > .ctx-menu-sub {
+  display: block;
+}
+
+.ctx-menu-item > a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #ccc;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.ctx-menu-item:hover > a:after {
+  border-left-color: #fff;
+}
+
+.ctx-menu-item.pull-left {
+  float: none;
+}
+
+.ctx-menu-item.pull-left > * >.ctx-menu-sub {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 6px 0 6px 6px;
+  -moz-border-radius: 6px 0 6px 6px;
+  border-radius: 6px 0 6px 6px;
+}
