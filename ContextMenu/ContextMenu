@@ -1,3 +1,0 @@
-angular.module('dmComponents', []);
-
-//Create Angular Based Context Menu Module
