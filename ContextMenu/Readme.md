@@ -1,3 +1,0 @@
-# Angular Based Context Menu
-
-
